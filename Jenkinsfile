@@ -19,7 +19,13 @@ pipeline {
 			sh "php my-app/index.php"
                         }
         }
-        stage('Four') {
+	stage('Four') {
+                steps {
+                        echo 'Remove Previous docker containers'
+                        sh "docker rm -f my-php-app"
+                        }
+        }
+        stage('Five') {
                         agent {
                                 docker {
                                         reuseNode false
@@ -28,7 +34,7 @@ pipeline {
                                         }
 			}
 				steps {
-					echo 'Deploying App to a docker container'
+					echo 'Deployed App to a docker container'
 				}
                                
         }
