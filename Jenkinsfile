@@ -7,12 +7,11 @@ pipeline {
 			sh rm -rf my-app
                 }
         }
-	    stage('Two'){
-		    
+	    stage('Two') {
 		steps {
                         echo 'Cloning PHP Application from github'
 			sh git clone https://github.com/gigithmg/my-app.git
-        }
+        	}
 	    }
         stage('Three') {
                 steps {
