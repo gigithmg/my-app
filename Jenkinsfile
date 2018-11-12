@@ -24,11 +24,11 @@ pipeline {
                                 docker {
                                         reuseNode false
 					image 'php:7.2.2-apache'
+					args '-p 80:80 --name my-php-app -v /home/gigith/my-app:/var/www/html'
                                         }
 			}
 				steps {
 					echo 'Deploying App to a docker container'
-					sh "docker run -d -p 80:80 --name my-php-app -v /home/gigith/my-app:/var/www/html php:7.2.2-apache"
 				}
                                
         }
