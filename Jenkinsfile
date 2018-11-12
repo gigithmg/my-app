@@ -22,7 +22,7 @@ pipeline {
         stage('Four') {
 				steps {
 					echo 'Remove OLD containers & Deploying App to a docker container'
-					sh "docker rm -f my-php-app &> /dev/null && docker run -d -p 80:80 --name my-php-app -v /home/gigith/my-app:/var/www/html php:7.2.2-apache"
+					sh "docker rm -f my-php-app &> /dev/null && sleep 40 && docker run -d -p 80:80 --name my-php-app -v /home/gigith/my-app:/var/www/html php:7.2.2-apache"
 				}
                                
         }
