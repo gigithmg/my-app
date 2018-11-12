@@ -19,22 +19,12 @@ pipeline {
 			sh "php my-app/index.php"
                         }
         }
-	stage('Four') {
-                steps {
-                        echo 'Remove Previous docker containers'
-                        sh "docker rm -f my-php-app"
-                        }
-        }
-        stage('Five') {
-                        agent {
-                                docker {
-                                        reuseNode false
-					image 'php:7.2.2-apache'
-					args '-p 80:80 --name my-php-app -v /home/gigith/my-app:/var/www/html'
-                                        }
-			}
+        stage('Four') {
 				steps {
-					echo 'Deployed App to a docker container'
+					echo 'Remove old containers if exists'
+					sh "[ '\$(sudo docker ps | grep my-php-app)' ] && sudo docker rm -f my-php-app"	
+					echo 'Deploying App to a docker container'
+					sh "sudo docker run -d -p 80:80 --name my-php-app -v /home/gigith/my-app:/var/www/html php:7.2.2-apache"
 				}
                                
         }
