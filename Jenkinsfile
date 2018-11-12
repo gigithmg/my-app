@@ -4,19 +4,19 @@ pipeline {
         stage('One') {
                 steps {
                         echo 'Remove Previous clones from github'
-			sh "rm -rf /home/gigith/my-git-app"
+			sh "sudo rm -rf /home/gigith/my-git-app"
                 }
         }
 	    stage('Two') {
 		steps {
                         echo 'Cloning PHP Application from github'
-			sh "git clone https://github.com/gigithmg/my-app.git /home/gigith/my-git-app"
+			sh "sudo git clone https://github.com/gigithmg/my-app.git /home/gigith/my-git-app"
         	}
 	    }
         stage('Three') {
                 steps {
 			echo 'Build Stage'
-			sh "php /home/gigith/my-git-app/index.php"
+			sh "sudo php /home/gigith/my-git-app/index.php"
                         }
         }
         stage('Four') {
