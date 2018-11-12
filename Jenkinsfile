@@ -24,7 +24,7 @@ pipeline {
 					echo 'Remove OLD containers'
 					sh "docker rm -f my-php-app &> /dev/null"
 					echo 'Deploying App to a docker container'
-					sh "docker run -d -p 80:80 --name my-php-app -v /home/gigith/my-git-app:/var/www/html php:7.2.2-apache"
+					sh "docker run -d -p 80:80 --name my-php-app -v /home/gigith/my-app:/var/www/html php:7.2.2-apache"
 				}
                                
         }
