@@ -21,8 +21,6 @@ pipeline {
         }
         stage('Four') {
 				steps {
-					echo 'Remove old containers if exists'
-					sh "[ '\$(docker ps | grep my-php-app)' ] && docker rm -f my-php-app"	
 					echo 'Deploying App to a docker container'
 					sh "docker run -d -p 80:80 --name my-php-app -v /home/gigith/my-app:/var/www/html php:7.2.2-apache"
 				}
