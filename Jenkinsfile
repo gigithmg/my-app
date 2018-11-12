@@ -3,19 +3,21 @@ pipeline {
     stages {
         stage('One') {
                 steps {
-                        echo 'Hi, this is stage One'
-			
+                        echo 'Remove Previous clones from github'
+			rm -rf my-app
                 }
         }
 	    stage('Two'){
 		    
 		steps {
-			echo 'Hi. this is stage Two'
+                        echo 'Cloning PHP Application from github'
+			git clone https://github.com/gigithmg/my-app.git
         }
 	    }
         stage('Three') {
                 steps {
-			echo "Hello stage Three"
+			echo "Build Stage"
+			php my-app/index.php
                         }
         }
         stage('Four') {
@@ -26,7 +28,10 @@ pipeline {
                                         }
 			}
 				steps {
-					echo 'Running the integration test..'
+					echo 'Remove old containers'
+					sudo docker rm -f my-php-app	
+					echo 'Deploying App to a docker container'
+					sudo docker run -d -p 80:80 --name my-php-app -v /home/gigith/my-app:/var/www/html php:7.2.2-apache
 				}
                                
         }
